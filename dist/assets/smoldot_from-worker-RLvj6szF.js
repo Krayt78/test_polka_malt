@@ -1,1 +1,0 @@
-import{s as p}from"./index-DyB_aecY.js";const m=(t,o={})=>{const s=new Promise(a=>{t.onmessage=n=>a(n.data)}),{port1:e,port2:r}=new MessageChannel;return t.postMessage(e,[e]),p({bytecode:s,portToWorker:r,...o})};export{m as startFromWorker};
