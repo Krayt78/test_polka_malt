@@ -1,15 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { type ChainId } from "@reactive-dot/core";
 
 import "./App.css";
 import { Header } from "./components/Header";
 import { HomePage, ContractorsPage } from "./pages";
 
-function App({ chainId, setChainId }: { chainId: ChainId; setChainId: React.Dispatch<React.SetStateAction<ChainId>> }) {
+function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
-        <Header chainId={chainId} setChainId={setChainId} />
+        <Header />
         
         <main className="pb-8">
           <Routes>

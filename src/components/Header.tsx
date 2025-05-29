@@ -1,15 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { ConnectionButton } from "dot-connect/react.js";
-import { ChainSwitch } from "./ChainSwitch";
-import { type ChainId } from "@reactive-dot/core";
 import polkadotLogo from "../assets/polkadot-logo.svg";
 
-interface HeaderProps {
-  chainId: ChainId;
-  setChainId: React.Dispatch<React.SetStateAction<ChainId>>;
-}
-
-export function Header({ chainId, setChainId }: HeaderProps) {
+export function Header() {
   const location = useLocation();
   
   const navigationItems = [
@@ -28,8 +21,8 @@ export function Header({ chainId, setChainId }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img src={polkadotLogo} className="h-8 w-8" alt="Polkadot logo" />
-            <span className="font-bold text-xl text-gray-900">Polkadot App</span>
+            <img src={polkadotLogo} className="h-8 w-8" alt="Polka Malt logo" />
+            <span className="font-bold text-xl text-gray-900">Polka Malt</span>
           </Link>
 
           {/* Navigation Links */}
@@ -52,7 +45,6 @@ export function Header({ chainId, setChainId }: HeaderProps) {
 
           {/* Right side controls */}
           <div className="flex items-center space-x-4">
-            <ChainSwitch chainId={chainId} setChainId={setChainId} />
             <ConnectionButton />
           </div>
         </div>
