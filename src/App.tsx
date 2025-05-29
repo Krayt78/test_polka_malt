@@ -1,36 +1,24 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { type ChainId } from "@reactive-dot/core";
 
-import { ConnectionButton } from "dot-connect/react.js";
-
 import "./App.css";
-import { ChainSwitch } from "./components/ChainSwitch";
-import { ChainPage } from "./ChainPage";
-
-import polkadotLogo from "./assets/polkadot-logo.svg";
-
-import { AccountList } from "./components/AccountList";
+import { Header } from "./components/Header";
+import { HomePage, ContractorsPage } from "./pages";
 
 function App({ chainId, setChainId }: { chainId: ChainId; setChainId: React.Dispatch<React.SetStateAction<ChainId>> }) {
   return (
-    <>
-      <div className="fixed right-10 top-10">
-        <div className="ml-5 inline-block">
-          <ConnectionButton />
-        </div>
-        <div className="ml-5 inline-block">
-          <ChainSwitch chainId={chainId} setChainId={setChainId} />
-        </div>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Header chainId={chainId} setChainId={setChainId} />
+        
+        <main className="pb-8">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/contractors" element={<ContractorsPage />} />
+          </Routes>
+        </main>
       </div>
-
-      <img src={polkadotLogo} className="logo mx-auto h-52 p-4" alt="Polkadot logo" />
-      <div className="container mx-auto p-2 leading-6">
-        <ChainPage />
-      </div>
-
-      <div>
-        <AccountList />
-      </div>
-    </>
+    </Router>
   );
 }
 
