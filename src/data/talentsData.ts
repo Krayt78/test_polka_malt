@@ -1,6 +1,6 @@
-import { Contractor } from '../types/contractor';
+import { Talent } from '../types/talent';
 
-export const contractorsData: Contractor[] = [
+export const talentsData: Talent[] = [
   {
     id: '1',
     name: 'Yosra',

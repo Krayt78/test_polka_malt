@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowPathIcon, StarIcon } from '@heroicons/react/24/outline';
 
-interface ContractorSidebarProps {
+interface TalentSidebarProps {
   priceRange: [number, number];
   onPriceRangeChange: (range: [number, number]) => void;
   selectedExperience: string[];
@@ -11,7 +11,7 @@ interface ContractorSidebarProps {
   onReset: () => void;
 }
 
-export const ContractorSidebar: React.FC<ContractorSidebarProps> = ({
+export const TalentSidebar: React.FC<TalentSidebarProps> = ({
   priceRange,
   onPriceRangeChange,
   selectedExperience,

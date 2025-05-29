@@ -7,8 +7,8 @@ export function Header() {
   const location = useLocation();
   
   const navigationItems = [
-    { path: "/", label: "Home", icon: "🏠" },
-    { path: "/contractors", label: "Contractors", icon: "👨‍💼" },
+    { path: "/", label: "Home", icon: "��" },
+    { path: "/talents", label: "Talents", icon: "👨‍💼" },
   ];
 
   const isActivePath = (path: string) => {
@@ -22,8 +22,8 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img src={polkadotLogo} className="h-8 w-8" alt="Polka Malt logo" />
-            <span className="font-bold text-xl text-gray-900 dark:text-white">Polka Malt</span>
+            <img src={polkadotLogo} className="h-8 w-8" alt="Polka Talent logo" />
+            <span className="font-bold text-xl text-gray-900 dark:text-white">Polka Talent</span>
           </Link>
 
           {/* Navigation Links */}

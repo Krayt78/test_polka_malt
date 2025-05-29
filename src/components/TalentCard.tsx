@@ -1,16 +1,16 @@
 import React from 'react';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon, StarIcon as StarSolidIcon } from '@heroicons/react/24/solid';
-import { Contractor } from '../types/contractor';
+import { Talent } from '../types/talent';
 
-interface ContractorCardProps {
-  contractor: Contractor;
+interface TalentCardProps {
+  talent: Talent;
   isFavorited?: boolean;
-  onToggleFavorite?: (contractorId: string) => void;
+  onToggleFavorite?: (talentId: string) => void;
 }
 
-export const ContractorCard: React.FC<ContractorCardProps> = ({
-  contractor,
+export const TalentCard: React.FC<TalentCardProps> = ({
+  talent,
   isFavorited = false,
   onToggleFavorite
 }) => {
@@ -55,7 +55,7 @@ export const ContractorCard: React.FC<ContractorCardProps> = ({
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-200 relative">
       {/* Availability Badge */}
-      {contractor.isAvailable && (
+      {talent.isAvailable && (
         <div className="absolute top-3 left-3 z-10">
           <div className="bg-green-500 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
             <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -66,7 +66,7 @@ export const ContractorCard: React.FC<ContractorCardProps> = ({
 
       {/* Favorite Button */}
       <button
-        onClick={() => onToggleFavorite?.(contractor.id)}
+        onClick={() => onToggleFavorite?.(talent.id)}
         className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 transition-colors"
       >
         {isFavorited ? (
@@ -79,8 +79,8 @@ export const ContractorCard: React.FC<ContractorCardProps> = ({
       {/* Profile Image */}
       <div className="aspect-w-16 aspect-h-12 bg-gray-100 dark:bg-gray-700">
         <img
-          src={contractor.profileImage}
-          alt={contractor.name}
+          src={talent.profileImage}
+          alt={talent.name}
           className="w-full h-48 object-cover"
         />
       </div>
@@ -90,28 +90,28 @@ export const ContractorCard: React.FC<ContractorCardProps> = ({
         {/* Header with name and rate */}
         <div className="flex justify-between items-start mb-2">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{contractor.name}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{talent.name}</h3>
           </div>
           <div className="text-right">
             <div className="text-lg font-bold text-gray-900 dark:text-white">
-              {contractor.rate} {contractor.currency}/{contractor.rateType}
+              {talent.rate} {talent.currency}/{talent.rateType}
             </div>
           </div>
         </div>
 
         {/* Title/Description */}
         <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 line-clamp-2">
-          {contractor.title}
+          {talent.title}
         </p>
 
         {/* Rating */}
         <div className="mb-3">
-          {renderStars(contractor.rating, contractor.reviewCount)}
+          {renderStars(talent.rating, talent.reviewCount)}
         </div>
 
         {/* Skills */}
         <div className="flex flex-wrap gap-1 mb-3">
-          {contractor.skills.slice(0, 6).map((skill, index) => (
+          {talent.skills.slice(0, 6).map((skill, index) => (
             <span
               key={index}
               className={`text-xs px-2 py-1 rounded-full ${getSkillColor(skill)}`}
@@ -119,15 +119,15 @@ export const ContractorCard: React.FC<ContractorCardProps> = ({
               {skill}
             </span>
           ))}
-          {contractor.skills.length > 6 && (
+          {talent.skills.length > 6 && (
             <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400">
-              +{contractor.skills.length - 6}
+              +{talent.skills.length - 6}
             </span>
           )}
         </div>
 
         {/* Recommendations */}
-        {contractor.isVerified && (
+        {talent.isVerified && (
           <div className="text-xs text-gray-600 dark:text-gray-400">
             <span className="inline-flex items-center">
               ⚡ 1 recommendation

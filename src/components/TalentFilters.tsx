@@ -1,12 +1,12 @@
 import React from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-interface ContractorFiltersProps {
+interface TalentFiltersProps {
   searchTerm: string;
   onSearchChange: (term: string) => void;
 }
 
-export const ContractorFilters: React.FC<ContractorFiltersProps> = ({
+export const TalentFilters: React.FC<TalentFiltersProps> = ({
   searchTerm,
   onSearchChange,
 }) => {

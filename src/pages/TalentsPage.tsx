@@ -1,44 +1,44 @@
 import React, { useState, useMemo } from 'react';
-import { ContractorCard } from '../components/ContractorCard';
-import { ContractorFilters } from '../components/ContractorFilters';
-import { ContractorSidebar } from '../components/ContractorSidebar';
-import { contractorsData } from '../data/contractorsData';
+import { TalentCard } from '../components/TalentCard';
+import { TalentFilters } from '../components/TalentFilters';
+import { TalentSidebar } from '../components/TalentSidebar';
+import { talentsData } from '../data/talentsData';
 
-export const ContractorsPage: React.FC = () => {
+export const TalentsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState<[number, number]>([200, 1210]);
   const [selectedExperience, setSelectedExperience] = useState<string[]>([]);
   const [selectedSpecialties, setSelectedSpecialties] = useState<string[]>([]);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
-  // Filter contractors based on search criteria
-  const filteredContractors = useMemo(() => {
-    return contractorsData.filter((contractor) => {
+  // Filter talents based on search criteria
+  const filteredTalents = useMemo(() => {
+    return talentsData.filter((talent) => {
       // Search term filter
       const matchesSearch = searchTerm === '' || 
-        contractor.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contractor.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        contractor.name.toLowerCase().includes(searchTerm.toLowerCase());
+        talent.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        talent.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        talent.name.toLowerCase().includes(searchTerm.toLowerCase());
 
       // Price range filter
-      const matchesPrice = contractor.rate >= priceRange[0] && contractor.rate <= priceRange[1];
+      const matchesPrice = talent.rate >= priceRange[0] && talent.rate <= priceRange[1];
 
       // Specialty filter
       const matchesSpecialty = selectedSpecialties.length === 0 ||
         selectedSpecialties.some(specialty => 
-          contractor.skills.some(skill => skill.toLowerCase().includes(specialty.toLowerCase()))
+          talent.skills.some(skill => skill.toLowerCase().includes(specialty.toLowerCase()))
         );
 
       return matchesSearch && matchesPrice && matchesSpecialty;
     });
   }, [searchTerm, priceRange, selectedSpecialties]);
 
-  const handleToggleFavorite = (contractorId: string) => {
+  const handleToggleFavorite = (talentId: string) => {
     const newFavorites = new Set(favorites);
-    if (newFavorites.has(contractorId)) {
-      newFavorites.delete(contractorId);
+    if (newFavorites.has(talentId)) {
+      newFavorites.delete(talentId);
     } else {
-      newFavorites.add(contractorId);
+      newFavorites.add(talentId);
     }
     setFavorites(newFavorites);
   };
@@ -53,7 +53,7 @@ export const ContractorsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Search Filters */}
-      <ContractorFilters
+      <TalentFilters
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
       />
@@ -63,7 +63,7 @@ export const ContractorsPage: React.FC = () => {
         <div className="flex gap-8">
           {/* Sidebar */}
           <div className="hidden lg:block">
-            <ContractorSidebar
+            <TalentSidebar
               priceRange={priceRange}
               onPriceRangeChange={setPriceRange}
               selectedExperience={selectedExperience}
@@ -79,7 +79,7 @@ export const ContractorsPage: React.FC = () => {
             {/* Results Header */}
             <div className="mb-6">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                Over {filteredContractors.length} "blockchain" talents available
+                Over {filteredTalents.length} "blockchain" talents available
               </h1>
               <p className="text-gray-600 dark:text-gray-300">
                 Find the perfect blockchain talent for your project
@@ -87,13 +87,13 @@ export const ContractorsPage: React.FC = () => {
             </div>
 
             {/* Talents Grid */}
-            {filteredContractors.length > 0 ? (
+            {filteredTalents.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-                {filteredContractors.map((contractor) => (
-                  <ContractorCard
-                    key={contractor.id}
-                    contractor={contractor}
-                    isFavorited={favorites.has(contractor.id)}
+                {filteredTalents.map((talent) => (
+                  <TalentCard
+                    key={talent.id}
+                    talent={talent}
+                    isFavorited={favorites.has(talent.id)}
                     onToggleFavorite={handleToggleFavorite}
                   />
                 ))}
@@ -117,7 +117,7 @@ export const ContractorsPage: React.FC = () => {
             )}
 
             {/* Load More Button */}
-            {filteredContractors.length > 0 && (
+            {filteredTalents.length > 0 && (
               <div className="text-center mt-12">
                 <button className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                   Load more talents
