@@ -20,10 +20,10 @@ export function HomePage() {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center">
           <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Your Blockchain Talent Marketplace</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Connect with experienced blockchain developers, smart contract experts, and Web3 specialists ready to bring your vision to life.
+            Connect with experienced blockchain developers, marketing experts, and Web3 specialists ready to bring your vision to life.
           </p>
           <div className="text-6xl mb-4">🚀</div>
-          <p className="text-gray-500 dark:text-gray-400">Get started by exploring our talented developers!</p>
+          <p className="text-gray-500 dark:text-gray-400">Get started by exploring the community's amazing talents and connect with them!</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mt-8">
@@ -31,15 +31,15 @@ export function HomePage() {
             <div className="text-2xl mb-3">👨‍💼</div>
             <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Expert Talents</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Find skilled blockchain developers with proven experience in Solidity, DeFi, and NFTs.
+              Find skilled blockchain developers with proven experience in the ecosystem.
             </p>
           </div>
           
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <div className="text-2xl mb-3">🔒</div>
-            <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Secure Payments</h3>
+            <div className="text-2xl mb-3">🔗</div>
+            <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Decentralized Profiles</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Built on blockchain technology for transparent and secure transactions.
+              Wallet-linked profiles ensure authentic talent verification and reputation tracking.
             </p>
           </div>
           
