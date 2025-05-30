@@ -2,9 +2,10 @@ import React, { useState, useMemo } from 'react';
 import { TalentCard } from '../components/TalentCard';
 import { TalentFilters } from '../components/TalentFilters';
 import { TalentSidebar } from '../components/TalentSidebar';
-import { talentsData } from '../data/talentsData';
+import { useTalent } from '../contexts/talent-context';
 
 export const TalentsPage: React.FC = () => {
+  const { talents } = useTalent();
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState<[number, number]>([200, 1210]);
   const [selectedExperience, setSelectedExperience] = useState<string[]>([]);
@@ -13,7 +14,7 @@ export const TalentsPage: React.FC = () => {
 
   // Filter talents based on search criteria
   const filteredTalents = useMemo(() => {
-    return talentsData.filter((talent) => {
+    return talents.filter((talent) => {
       // Search term filter
       const matchesSearch = searchTerm === '' || 
         talent.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -31,7 +32,7 @@ export const TalentsPage: React.FC = () => {
 
       return matchesSearch && matchesPrice && matchesSpecialty;
     });
-  }, [searchTerm, priceRange, selectedSpecialties]);
+  }, [talents, searchTerm, priceRange, selectedSpecialties]);
 
   const handleToggleFavorite = (talentId: string) => {
     const newFavorites = new Set(favorites);

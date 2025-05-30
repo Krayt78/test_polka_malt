@@ -55,6 +55,29 @@ export const TalentSidebar: React.FC<TalentSidebarProps> = ({
     }
   };
 
+  const minPrice = 100;
+  const maxPrice = 2000;
+
+  const handleMinChange = (value: number) => {
+    if (value <= priceRange[1]) {
+      onPriceRangeChange([value, priceRange[1]]);
+    }
+  };
+
+  const handleMaxChange = (value: number) => {
+    if (value >= priceRange[0]) {
+      onPriceRangeChange([priceRange[0], value]);
+    }
+  };
+
+  const getSliderProgress = () => {
+    const minPercent = ((priceRange[0] - minPrice) / (maxPrice - minPrice)) * 100;
+    const maxPercent = ((priceRange[1] - minPrice) / (maxPrice - minPrice)) * 100;
+    return { minPercent, maxPercent };
+  };
+
+  const { minPercent, maxPercent } = getSliderProgress();
+
   return (
     <div className="w-80 bg-white dark:bg-gray-800 p-6">
       {/* Header */}
@@ -72,33 +95,75 @@ export const TalentSidebar: React.FC<TalentSidebarProps> = ({
       {/* Price Range */}
       <div className="mb-8">
         <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-4">Daily rate</h3>
-        <div className="space-y-3">
-          <div className="flex items-center gap-3">
+        
+        {/* Price Display */}
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600 dark:text-gray-400">$</span>
             <input
               type="number"
-              placeholder="200"
               value={priceRange[0]}
-              onChange={(e) => onPriceRangeChange([parseInt(e.target.value) || 0, priceRange[1]])}
-              className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              onChange={(e) => handleMinChange(parseInt(e.target.value) || minPrice)}
+              className="w-16 px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              min={minPrice}
+              max={maxPrice}
             />
-            <span className="text-gray-500 dark:text-gray-400">$ and below</span>
           </div>
-          <div className="flex items-center gap-3">
+          <span className="text-sm text-gray-500 dark:text-gray-400">to</span>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600 dark:text-gray-400">$</span>
             <input
               type="number"
-              placeholder="1210"
               value={priceRange[1]}
-              onChange={(e) => onPriceRangeChange([priceRange[0], parseInt(e.target.value) || 1500])}
-              className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              onChange={(e) => handleMaxChange(parseInt(e.target.value) || maxPrice)}
+              className="w-16 px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              min={minPrice}
+              max={maxPrice}
             />
-            <span className="text-gray-500 dark:text-gray-400">$ and above</span>
           </div>
-          {/* Price Range Slider Visualization */}
-          <div className="relative mt-4">
-            <div className="h-2 bg-gray-200 dark:bg-gray-600 rounded-full">
-              <div className="h-2 bg-teal-600 dark:bg-teal-500 rounded-full" style={{ width: '60%' }}></div>
-            </div>
+        </div>
+
+        {/* Double Range Slider */}
+        <div className="relative">
+          {/* Track */}
+          <div className="h-2 bg-gray-200 dark:bg-gray-600 rounded-full relative">
+            {/* Active Range */}
+            <div 
+              className="absolute h-2 bg-teal-600 dark:bg-teal-500 rounded-full"
+              style={{
+                left: `${minPercent}%`,
+                width: `${maxPercent - minPercent}%`
+              }}
+            />
           </div>
+
+          {/* Min Range Slider */}
+          <input
+            type="range"
+            min={minPrice}
+            max={maxPrice}
+            value={priceRange[0]}
+            onChange={(e) => handleMinChange(parseInt(e.target.value))}
+            className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer"
+            style={{ top: '0px' }}
+          />
+
+          {/* Max Range Slider */}
+          <input
+            type="range"
+            min={minPrice}
+            max={maxPrice}
+            value={priceRange[1]}
+            onChange={(e) => handleMaxChange(parseInt(e.target.value))}
+            className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer"
+            style={{ top: '0px' }}
+          />
+        </div>
+
+        {/* Range Labels */}
+        <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+          <span>${minPrice}</span>
+          <span>${maxPrice}+</span>
         </div>
       </div>
 

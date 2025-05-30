@@ -2,14 +2,21 @@ import { Link, useLocation } from "react-router-dom";
 import { ConnectionButton } from "dot-connect/react.js";
 import polkadotLogo from "../assets/polkadot-logo.svg";
 import { ThemeToggle } from "./theme-toggle";
+import { useWalletConnection } from "../hooks/use-wallet-connection";
 
 export function Header() {
   const location = useLocation();
+  const { isConnected } = useWalletConnection();
   
-  const navigationItems = [
-    { path: "/", label: "Home", icon: "��" },
+  const baseNavigationItems = [
+    { path: "/", label: "Home", icon: "🏠" },
     { path: "/talents", label: "Talents", icon: "👨‍💼" },
   ];
+
+  // Add Profile link only when wallet is connected
+  const navigationItems = isConnected 
+    ? [...baseNavigationItems, { path: "/profile", label: "Profile", icon: "👤" }]
+    : baseNavigationItems;
 
   const isActivePath = (path: string) => {
     if (path === "/") return location.pathname === "/";
